@@ -1,34 +1,37 @@
 import telebot
-import qrcode
+from telebot import types
+import config
+import QRcodeCreate
+import texts
+import os
 
-TOKEN = '' # Токен вашего бота
-bot = telebot.TeleBot(TOKEN)
-
+bot = telebot.TeleBot(config.token)
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "Привет, я твой личный QR-генератор! "
-                          "Пришли мне текст, и я с удовольствием создам для тебя красивый QR-код в формате PNG. "
-                          "Давай начнем! 😊🔍🔲")
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    Cbutton = types.KeyboardButton(texts.circleB)
+    Rbutton = types.KeyboardButton(texts.regularB)
+    markup.add(Cbutton, Rbutton)
+    bot.send_message(message.chat.id, text=texts.greetings)
+    bot.send_message(message.chat.id,text=texts.warning,reply_markup=markup)
 
 @bot.message_handler(content_types=["text"])
 def send_qr(message):
-#Создение qr кода
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=16,
-        border=4,
-    )
-    qr.add_data(message.text)
-    qr.make(fit=True)
-# Преобразование в png
-    img = qr.make_image(fill_color="black", back_color="white")
-    img.save('photo.png')
-    img = open('photo.png','rb')
+    circleTypeQR = False
+    if message.text == texts.circleB:
+        circleTypeQR = True
+        bot.send_message(message.chat.id,text=texts.sendText)
+    elif message.text == texts.regularB:
+        circleTypeQR = False
+        bot.send_message(message.chat.id, text=texts.sendText)
+    else:
+        if circleTypeQR:
+            QRcodeCreate.create_circle_qr(message.text)
+        else:
+            QRcodeCreate.create_regular_qr(message.text)
 
-    bot.send_photo(message.chat.id, img, caption='Вот твой уникальный QR-код! '
-                                                 'Теперь ты можешь использовать его для быстрого доступа к информации или передачи данных. '
-                                                 'Надеюсь, он будет полезен для тебя!😉📲🔍')
-    img.close()
+    with open('qr-code.png','rb') as photo:
+        bot.send_photo(message.chat.id, photo, caption=texts.done)
+    os.remove('qr-code.png')
 
 bot.infinity_polling()

@@ -18,7 +18,7 @@ def create_circle_qr(txt):
     img = qr.make_image(image_factory=StyledPilImage, module_drawer=CircleModuleDrawer(), fill_color="black",
                         back_color="white")
     qr.clear()
-    img.save('photo.png')
+    img.save('qr-code.png')
 
 
 def create_regular_qr(txt):
@@ -34,4 +34,4 @@ def create_regular_qr(txt):
     img = qr.make_image(fill_color="black",
                         back_color="white")
     qr.clear()
-    img.save('photo.png')
+    img.save('qr-code.png')
