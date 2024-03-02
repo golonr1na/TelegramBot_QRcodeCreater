@@ -1,6 +1,5 @@
 import telebot
 import qrcode
-from io import BytesIO
 
 TOKEN = '' # Токен вашего бота
 bot = telebot.TeleBot(TOKEN)
