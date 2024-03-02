@@ -19,24 +19,17 @@ def send_welcome(message):
 
 
 @bot.message_handler(content_types=["text"])
-def send_qr(message, qrtypeiscircle):
+def send_qr(message):
     if message.text == texts.circleB:
-        if qrtypeiscircle < 1:
-            while qrtypeiscircle != 1:
-                qrtypeiscircle += 1
+        QRcodeCreate.typeiscircle = True
         bot.send_message(message.chat.id, text=texts.selectedC)
         bot.send_message(message.chat.id, text=texts.sendText)
     elif message.text == texts.regularB:
-        if qrtypeiscircle > 0:
-            while qrtypeiscircle != 0:
-                qrtypeiscircle -= 1
+        QRcodeCreate.typeiscircle = False
         bot.send_message(message.chat.id, text=texts.selectedR)
         bot.send_message(message.chat.id, text=texts.sendText)
     else:
-        if qrtypeiscircle == 0:
-            QRcodeCreate.create_regular_qr(message.text)
-        else:
-            QRcodeCreate.create_circle_qr(message.text)
+        QRcodeCreate.create_qr(message.text)
 
         with open('qr-code.png', 'rb') as photo:
             bot.send_photo(message.chat.id, photo=photo, caption=texts.done)
