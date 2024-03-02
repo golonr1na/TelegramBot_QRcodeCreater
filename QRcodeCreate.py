@@ -4,7 +4,6 @@ from qrcode.image.styles.moduledrawers import CircleModuleDrawer
 
 img = ''
 
-
 def create_circle_qr(txt):
     qr = qrcode.QRCode(
         version=1,
@@ -35,3 +34,5 @@ def create_regular_qr(txt):
                         back_color="white")
     qr.clear()
     img.save('qr-code.png')
+
+
