@@ -6,7 +6,7 @@ typeiscircle = False
 def create_qr(txt):
     qr = qrcode.QRCode(
         error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=16,
+        box_size=20,
         border=2,
     )
     qr.add_data(txt)
