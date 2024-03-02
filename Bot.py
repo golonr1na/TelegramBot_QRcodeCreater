@@ -29,6 +29,7 @@ def send_qr(message):
         bot.send_message(message.chat.id, text=texts.selectedR)
         bot.send_message(message.chat.id, text=texts.sendText)
     else:
+        #print(message.text, " - from {0.first_name} {0.last_name}".format(message.from_user))
         QRcodeCreate.create_qr(message.text)
 
         with open('qr-code.png', 'rb') as photo:
