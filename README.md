@@ -12,3 +12,7 @@ pip install pyTelegramBotAPI
 ```python
 pip install qrcode
 ```
+
+```python
+pip install "qrcode[pil]"
+```
