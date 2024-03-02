@@ -2,8 +2,6 @@ import qrcode
 from qrcode.image.styledpil import StyledPilImage
 from qrcode.image.styles.moduledrawers import CircleModuleDrawer
 
-img = ''
-
 def create_circle_qr(txt):
     qr = qrcode.QRCode(
         version=1,
