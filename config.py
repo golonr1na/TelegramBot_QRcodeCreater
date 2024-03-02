@@ -1,2 +1,2 @@
-token = '7009489756:AAHVnCDC0lb6Vim9EdoTGFsZOiJNUTomqWU'
+token = '7009489756:AAHlxwOm-hKXAobFg76x6xT2i7YfNSxu-i4'
 # Токен бота
