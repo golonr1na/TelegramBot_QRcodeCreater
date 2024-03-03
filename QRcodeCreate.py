@@ -5,8 +5,8 @@ from qrcode.image.styles.moduledrawers.pil import CircleModuleDrawer
 typeiscircle = False
 def create_qr(txt):
     qr = qrcode.QRCode(
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=20,
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=30,
         border=2,
     )
     qr.add_data(txt)
