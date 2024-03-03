@@ -13,7 +13,7 @@ def create_qr(txt):
     # созание кода
     qr.add_data(txt)
     qr.make(fit=True)
-    # Проверка на тип QR-кода
+    # Проверка на тип QR-кода и создание изображения
     if typeiscircle:
         img = qr.make_image(image_factory=StyledPilImage, module_drawer=CircleModuleDrawer())
     else:
